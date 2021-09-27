@@ -1,5 +1,6 @@
-import {expect} from "chai";
+import { expect } from "chai";
 import supertest from 'supertest';
+
 
 describe('auth', function (){
     const request = supertest('http://paysis.herokuapp.com');
@@ -7,7 +8,7 @@ describe('auth', function (){
     it('successful log in', function (done){
         request
             .post('/auth')
-            .send({login: 'adminius', password: 'supers3cret'})
+            .send({login: process.env.LOGIN, password: process.env.PASSWORD})
             .end(function (err, res){
                 expect(res.statusCode).to.eq(200);
                 expect(res.body.token).not .to.be.undefined;
